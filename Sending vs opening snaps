@@ -1,0 +1,19 @@
+
+
+QUESTION:
+
+https://datalemur.com/questions/time-spent-snaps
+
+
+ANSWER:
+
+
+with cte as (SELECT age_bucket,
+   sum(CASE WHEN activity_type='open' then time_spent else 0 end) as sumopen,
+   sum(CASE WHEN activity_type='send' then time_spent else 0 end) as sumsend
+FROM activities a inner join age_breakdown ag on a.user_id=ag.user_id group by age_bucket)
+
+SELECT 
+  age_bucket, 
+  ROUND(100.00*sumsend/(sumsend+sumopen),2) AS send_perc, 
+  ROUND(100.00*sumopen/(sumsend+sumopen),2) AS open_perc FROM cte;
