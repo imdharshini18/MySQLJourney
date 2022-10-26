@@ -1,0 +1,9 @@
+QUESTION:
+https://datalemur.com/questions/linkedin-power-creators
+
+ANSWER :
+
+SELECT P.PROFILE_ID FROM 
+personal_profiles p INNER JOIN 
+COMPANY_PAGES C ON P.EMPLOYER_ID=C.COMPANY_ID WHERE 
+P.FOLLOWERS>C.FOLLOWERS ORDER BY P.PROFILE_ID;
